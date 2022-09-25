@@ -1,14 +1,82 @@
 // TODO: Include packages needed for this application
+//3rd party package
+const inquirer = require('inquirer');
+//Built in Package
 const fs = require('fs');
-// const inquirer = require('inquirer');
+//Custom Package
 const generateMarkdown = require('./utils/generateMarkdown');
 
 
 // TODO: Create an array of questions for user input
-const questions = [
+// const questions = [
+//     {
+//         type: 'input',
+//         message: 'What is the Title of your project',
+//         name: 'projTitle',
+//     },
+//     {
+//         type: 'input',
+//         message: 'Please enter a description of your project:',
+//         name: 'description'
+//     },
+//     {
+//         type: 'input',
+//         message: 'Please enter installation instructions for your project:',
+//         name: 'installInstruc'
+//     },
+//     {
+//         type: 'input',
+//         message: 'Please enter usage information:',
+//         name: 'usageInfo',
+//     },
+//     {
+//         type: 'input',
+//         message: 'Please enter contribution guidleines:',
+//         name: 'guidelines',
+//     },
+//     {
+//         type: 'input',
+//         message: 'Please enter test instructions for your project:',
+//         name: 'testInstruc',
+//     },
+//     {
+//         type: 'input',
+//         message: 'Please enter your GitHub username:',
+//         name: 'Github',
+//     },
+//     {
+//         type: 'input',
+//         message: 'Please enter your email address:',
+//         name: 'Email',
+//     },
+//     {
+//         type: 'list',
+//         choices: ['license1', 'license2', 'license3', 'license4'],
+//         name: 'license',
+//     },
+// ];
+
+// TODO: Create a function to write README file
+//this function takes has 2 parameters: fileName(used to name the file to generate), and the data to fill in the fileName
+function writeToFile(fileName, data) {
+    // this writeFile will completely create a new file every time this function is called
+    // the data used to fill the fileName will be pulled from the generateMarkdown function from generateMarkdown.js
+    //the error function parameter(in e6) will check if there is an error in writing or creating the file, if so then there will be an error message to the console, if not then there will be a Success message in the console
+    
+    //fs is an package, writeFile is a method
+    fs.writeFile(fileName, generateMarkdown(data), (err) => {
+        err ? console.error(err) : console.log("Success!");
+    })
+}
+
+// TODO: Create a function to initialize app
+function init() {
+    //inquirer package with the prompt method lists an array of questions for the input to respond to
+    inquirer
+    .prompt([
     {
         type: 'input',
-        message: 'What is the Title of your project',
+        message: 'What is the Title of your project?',
         name: 'projTitle',
     },
     {
@@ -37,50 +105,25 @@ const questions = [
         name: 'testInstruc',
     },
     {
+        type: 'input',
+        message: 'Please enter your GitHub username:',
+        name: 'GitHub',
+    },
+    {
+        type: 'input',
+        message: 'Please enter your email address:',
+        name: 'Email',
+    },
+    {
         type: 'list',
-        choices: ['license1', 'license2'],
+        choices: ['GNU', 'MIT', 'Mozilla', 'Apache', 'None'],
         name: 'license',
     },
-];
-
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
-
-// TODO: Create a function to initialize app
-function init() {
-    
+    //answers will grab all the response from the user and places it into the 
+]).then((answers) => {
+    writeToFile('README.md', answers);
+})
 }
 
 // Function call to initialize app
 init();
-
-
-
-
-
-// ```md
-// GIVEN a command-line application that accepts user input
-
-// WHEN I am prompted for information about my application repository
-// THEN a high-quality, professional README.md is generated with the title of my project and sections 
-//entitled::: Description, Table of Contents, Installation, Usage, License, Contributing, Tests, and Questions
-
-// WHEN I enter my project title
-// THEN this is displayed as the title of the README
-
-// WHEN I enter a description, installation instructions, usage information, contribution guidelines, and test instructions
-// THEN this information is added to the sections of the README entitled Description, Installation, Usage, Contributing, and Tests
-
-// WHEN I choose a license for my application from a list of options
-// THEN a badge for that license is added near the top of the README and a notice is added to the section of the README entitled License that explains which license the application is covered under
-
-// WHEN I enter my GitHub username
-// THEN this is added to the section of the README entitled Questions, with a link to my GitHub profile
-
-// WHEN I enter my email address
-// THEN this is added to the section of the README entitled Questions, with instructions on how to reach me with additional questions
-
-// WHEN I click on the links in the Table of Contents
-// THEN I am taken to the corresponding section of the README
-// ```
-

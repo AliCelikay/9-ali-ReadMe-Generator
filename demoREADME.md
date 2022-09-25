@@ -8,17 +8,24 @@
 ## Description
 
 ## Table of Contents
+  * [Installation](#installation)
+  * [Usage](#usage)
+  * [Contributing](#contributing)
+  * [Tests](#tests)
+  * [Contacts](#contacts)
 
 ## Installation
+${data.installInstruc}
 
 ## Usage
-
-## License
+${data.usageInfo}
 
 ## Contributing
+${data.guidelines}
 
 ## Tests
+${data.testInstruc}
 
-## Questions:
+## Contacts:
 ### GitHub:
 ### Email:
